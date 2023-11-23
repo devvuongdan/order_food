@@ -23,8 +23,7 @@ class AAddCategoryViewController extends ChangeNotifier {
     Api api = Api('Category');
     api.addDocument({FieldName.title: _title}, file: _fileImg).then((value) {
       if (value == null) {
-        
-          locator<DataApp>().reloadCategory();
+        locator<DataApp>().reloadCategory();
         Navigator.pop(context);
       } else {
         ADialog.show(context, content: value);

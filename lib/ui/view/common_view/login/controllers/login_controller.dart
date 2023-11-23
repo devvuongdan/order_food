@@ -6,7 +6,7 @@ import 'package:project_order_food/locator.dart';
 import 'package:project_order_food/ui/router.dart';
 import 'package:project_order_food/ui/widget/dialog/a_dialog.dart';
 
-class LoginController {
+class LoginController implements LoginControllerX {
   String? _email;
   String? _password;
 
@@ -18,10 +18,12 @@ class LoginController {
     _password = value;
   }
 
-  void signIn(BuildContext context) async {
+  @override
+  Future<bool>? signIn(BuildContext context) async {
     if (_email == 'admin@gmail.com' && _password == 'admin') {
       locator<GetNavigation>().replaceTo(RoutePaths.loadingView);
       logSuccess('Đăng nhập với tư cách admin');
+      return true;
     } else {
       final AuthenticationService auth = AuthenticationService();
       await auth.signIn(_email ?? '', _password ?? '').then((value) {
@@ -32,6 +34,11 @@ class LoginController {
           ADialog.show(context, content: value);
         }
       });
+      return false;
     }
   }
+}
+
+abstract class LoginControllerX {
+  Future<bool>? signIn(BuildContext context);
 }

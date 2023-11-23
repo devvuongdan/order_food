@@ -4,7 +4,7 @@ import 'package:project_order_food/core/service/get_navigation.dart';
 import 'package:project_order_food/locator.dart';
 
 abstract class BaseAuth {
-  Future<String?> signIn(String email, String password);
+  Future<String?>? signIn(String email, String password);
 
   Future<UserCredential?> signUp(String email, String password);
 
